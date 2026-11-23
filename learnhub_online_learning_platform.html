@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnHub – Online Learning Platform</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for clean UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brandBlue: '#2563EB',
+                        brandPurple: '#7C3AED',
+                        darkSlate: '#0F172A',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brandPurple selection:text-white">
+
+    <!-- ===================================================================== -->
+    <!-- 1. NAVIGATION BAR                                                     -->
+    <!-- ===================================================================== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-2.5 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brandBlue to-brandPurple flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-graduation-cap text-xl"></i>
+                    </div>
+                    <span class="font-heading font-extrabold text-2xl tracking-tight bg-gradient-to-r from-brandBlue to-brandPurple bg-clip-text text-transparent">
+                        LearnHub
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600">
+                    <a href="#home" class="hover:text-brandBlue transition-colors">Home</a>
+                    <a href="#categories" class="hover:text-brandBlue transition-colors">Categories</a>
+                    <a href="#courses" class="hover:text-brandBlue transition-colors">Courses</a>
+                    <a href="#instructors" class="hover:text-brandBlue transition-colors">Instructors</a>
+                    <a href="#reviews" class="hover:text-brandBlue transition-colors">Reviews</a>
+                    <a href="#contact" class="hover:text-brandBlue transition-colors">Contact</a>
+                </nav>
+
+                <!-- Desktop Auth Buttons -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <button onclick="openAuthModal('login')" class="px-4 py-2.5 text-sm font-semibold text-brandBlue hover:bg-blue-50 rounded-xl transition-colors">
+                        Login
+                    </button>
+                    <button onclick="openAuthModal('signup')" class="px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-brandBlue to-brandPurple hover:opacity-95 rounded-xl shadow-md shadow-blue-500/20 transition-all hover:-translate-y-0.5">
+                        Sign Up
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" aria-label="Toggle Menu" class="lg:hidden p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-4 pt-3 pb-6 space-y-2 shadow-xl">
+            <a href="#home" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-brandBlue">Home</a>
+            <a href="#categories" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-brandBlue">Categories</a>
+            <a href="#courses" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-brandBlue">Courses</a>
+            <a href="#instructors" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-brandBlue">Instructors</a>
+            <a href="#reviews" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-brandBlue">Reviews</a>
+            <a href="#contact" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-brandBlue">Contact</a>
+            
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
+                <button onclick="openAuthModal('login')" class="w-full py-2.5 text-center font-semibold text-brandBlue border border-brandBlue rounded-xl hover:bg-blue-50">
+                    Login
+                </button>
+                <button onclick="openAuthModal('signup')" class="w-full py-2.5 text-center font-semibold text-white bg-gradient-to-r from-brandBlue to-brandPurple rounded-xl shadow-md">
+                    Sign Up
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- 2. HERO SECTION                                                       -->
+    <!-- ===================================================================== -->
+    <section id="home" class="relative overflow-hidden bg-darkSlate text-white">
+        <!-- Background Image with Fallback -->
+        <img 
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1920&q=80" 
+            onerror="this.src='https://placehold.co/1920x1080/1e293b/ffffff?text=LearnHub+Online+Learning'"
+            alt="Students collaborating with laptops" 
+            class="absolute inset-0 w-full h-full object-cover opacity-25"
+        >
+        <!-- Blue to Purple Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-brandBlue/90 via-indigo-900/85 to-brandPurple/90"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
+            <div class="max-w-3xl mx-auto text-center">
+                <!-- Pill Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium text-blue-100 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Trusted by 50,000+ Learners Across India
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight mb-6">
+                    Learn New Skills, <br class="hidden sm:inline">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-200 via-white to-purple-200">
+                        Build Your Future
+                    </span>
+                </h1>
+
+                <!-- Description -->
+                <p class="text-base sm:text-lg lg:text-xl text-blue-100/90 leading-relaxed mb-9 max-w-2xl mx-auto">
+                    Master in-demand tech, AI, and design skills with hands-on projects led by industry experts. Start learning today at your own pace.
+                </p>
+
+                <!-- Search Bar -->
+                <form onsubmit="handleHeroSearch(event)" class="max-w-2xl mx-auto bg-white p-2 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-2 mb-8">
+                    <div class="flex items-center flex-1 px-4 py-2 text-slate-700">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 mr-3"></i>
+                        <input 
+                            type="text" 
+                            id="hero-search-input"
+                            placeholder="What do you want to learn? (e.g., Python, AI, UI/UX...)" 
+                            class="w-full bg-transparent text-sm sm:text-base focus:outline-none placeholder:text-slate-400"
+                        >
+                    </div>
+                    <button type="submit" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white font-semibold text-sm sm:text-base hover:opacity-95 transition-all shadow-md cursor-pointer">
+                        Search
+                    </button>
+                </form>
+
+                <!-- CTA & Trust Stats -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#courses" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-brandBlue font-bold text-base shadow-lg hover:bg-blue-50 transition-all hover:-translate-y-0.5">
+                        Explore Courses
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="#enrollment" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold text-base backdrop-blur-sm transition-all">
+                        Start Free Trial
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 3. COURSE CATEGORIES                                                  -->
+    <!-- ===================================================================== -->
+    <section id="categories" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-brandPurple font-semibold text-sm uppercase tracking-wider">Top Domains</span>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mt-2 mb-4">
+                Explore Course Categories
+            </h2>
+            <p class="text-slate-600 text-base">
+                Click any category below to filter our curated, career-ready learning paths.
+            </p>
+        </div>
+
+        <!-- 6 Responsive Category Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Category 1: Web Development -->
+            <button onclick="filterCourses('Web Development')" class="category-card text-left group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brandBlue/40 transition-all duration-300 hover:-translate-y-1 flex items-center gap-5">
+                <div class="w-14 h-14 rounded-2xl bg-blue-50 text-brandBlue group-hover:bg-brandBlue group-hover:text-white flex items-center justify-center text-2xl transition-colors shrink-0">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div>
+                    <h3 class="font-heading font-bold text-lg text-slate-900 group-hover:text-brandBlue transition-colors">Web Development</h3>
+                    <p class="text-sm text-slate-500 mt-0.5">42 Courses • HTML, CSS, React</p>
+                </div>
+            </button>
+
+            <!-- Category 2: Python -->
+            <button onclick="filterCourses('Python')" class="category-card text-left group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brandPurple/40 transition-all duration-300 hover:-translate-y-1 flex items-center gap-5">
+                <div class="w-14 h-14 rounded-2xl bg-purple-50 text-brandPurple group-hover:bg-brandPurple group-hover:text-white flex items-center justify-center text-2xl transition-colors shrink-0">
+                    <i class="fa-brands fa-python"></i>
+                </div>
+                <div>
+                    <h3 class="font-heading font-bold text-lg text-slate-900 group-hover:text-brandPurple transition-colors">Python</h3>
+                    <p class="text-sm text-slate-500 mt-0.5">35 Courses • Automation & APIs</p>
+                </div>
+            </button>
+
+            <!-- Category 3: Java -->
+            <button onclick="filterCourses('Java')" class="category-card text-left group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brandBlue/40 transition-all duration-300 hover:-translate-y-1 flex items-center gap-5">
+                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white flex items-center justify-center text-2xl transition-colors shrink-0">
+                    <i class="fa-brands fa-java"></i>
+                </div>
+                <div>
+                    <h3 class="font-heading font-bold text-lg text-slate-900 group-hover:text-indigo-600 transition-colors">Java</h3>
+                    <p class="text-sm text-slate-500 mt-0.5">28 Courses • Spring Boot & DSA</p>
+                </div>
+            </button>
+
+            <!-- Category 4: AI -->
+            <button onclick="filterCourses('AI')" class="category-card text-left group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brandPurple/40 transition-all duration-300 hover:-translate-y-1 flex items-center gap-5">
+                <div class="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 group-hover:bg-violet-600 group-hover:text-white flex items-center justify-center text-2xl transition-colors shrink-0">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="font-heading font-bold text-lg text-slate-900 group-hover:text-violet-600 transition-colors">Artificial Intelligence</h3>
+                    <p class="text-sm text-slate-500 mt-0.5">31 Courses • LLMs & Deep Learning</p>
+                </div>
+            </button>
+
+            <!-- Category 5: Data Science -->
+            <button onclick="filterCourses('Data Science')" class="category-card text-left group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brandBlue/40 transition-all duration-300 hover:-translate-y-1 flex items-center gap-5">
+                <div class="w-14 h-14 rounded-2xl bg-sky-50 text-sky-600 group-hover:bg-sky-600 group-hover:text-white flex items-center justify-center text-2xl transition-colors shrink-0">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                    <h3 class="font-heading font-bold text-lg text-slate-900 group-hover:text-sky-600 transition-colors">Data Science</h3>
+                    <p class="text-sm text-slate-500 mt-0.5">26 Courses • SQL, Pandas & ML</p>
+                </div>
+            </button>
+
+            <!-- Category 6: UI/UX Design -->
+            <button onclick="filterCourses('UI/UX Design')" class="category-card text-left group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brandPurple/40 transition-all duration-300 hover:-translate-y-1 flex items-center gap-5">
+                <div class="w-14 h-14 rounded-2xl bg-fuchsia-50 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white flex items-center justify-center text-2xl transition-colors shrink-0">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <div>
+                    <h3 class="font-heading font-bold text-lg text-slate-900 group-hover:text-fuchsia-600 transition-colors">UI/UX Design</h3>
+                    <p class="text-sm text-slate-500 mt-0.5">24 Courses • Figma & Prototyping</p>
+                </div>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 4. POPULAR COURSES                                                    -->
+    <!-- ===================================================================== -->
+    <section id="courses" class="py-16 md:py-24 bg-white border-y border-slate-200/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+                <div>
+                    <span class="text-brandBlue font-semibold text-sm uppercase tracking-wider">Student Favorites</span>
+                    <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mt-2">
+                        Popular Courses
+                    </h2>
+                </div>
+                
+                <!-- Filter Pills -->
+                <div class="flex flex-wrap items-center gap-2" id="filter-buttons">
+                    <button onclick="filterCourses('All')" class="filter-btn active px-4 py-2 rounded-xl text-sm font-semibold bg-brandBlue text-white transition-colors">All</button>
+                    <button onclick="filterCourses('Web Development')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">Web Dev</button>
+                    <button onclick="filterCourses('Python')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">Python</button>
+                    <button onclick="filterCourses('AI')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">AI & Data</button>
+                    <button onclick="filterCourses('UI/UX Design')" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">UI/UX</button>
+                </div>
+            </div>
+
+            <!-- Responsive Course Grid -->
+            <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Course Card 1: Full-Stack Web Development -->
+                <article class="course-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col" data-category="Web Development">
+                    <div class="relative h-52 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/2563EB/ffffff?text=Full-Stack+Web+Dev'"
+                            alt="Full-Stack Web Development" 
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-lg bg-brandBlue text-white text-xs font-semibold shadow">
+                            Web Development
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                            <span><i class="fa-regular fa-clock mr-1 text-brandBlue"></i> 36 Hours</span>
+                            <span class="flex items-center gap-1 font-semibold text-amber-500">
+                                <i class="fa-solid fa-star"></i> 4.9 <span class="text-slate-400 font-normal">(1,240)</span>
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-slate-900 mb-2 line-clamp-2">
+                            Complete Full-Stack Web Development Bootcamp
+                        </h3>
+                        <p class="text-sm text-slate-500 mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-chalkboard-user text-brandPurple"></i> By Aarav Sharma
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="font-heading font-extrabold text-2xl text-slate-900">₹1,999</span>
+                                <span class="text-xs text-slate-400 line-through ml-1.5">₹4,999</span>
+                            </div>
+                            <button onclick="selectCourseForEnroll('Complete Full-Stack Web Development Bootcamp')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white text-sm font-semibold hover:opacity-95 transition-all shadow-sm cursor-pointer">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course Card 2: Python Programming -->
+                <article class="course-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col" data-category="Python">
+                    <div class="relative h-52 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/7C3AED/ffffff?text=Python+Masterclass'"
+                            alt="Python Masterclass" 
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-lg bg-brandPurple text-white text-xs font-semibold shadow">
+                            Python
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                            <span><i class="fa-regular fa-clock mr-1 text-brandPurple"></i> 28 Hours</span>
+                            <span class="flex items-center gap-1 font-semibold text-amber-500">
+                                <i class="fa-solid fa-star"></i> 4.8 <span class="text-slate-400 font-normal">(980)</span>
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-slate-900 mb-2 line-clamp-2">
+                            Python for Beginners to Advanced Automation
+                        </h3>
+                        <p class="text-sm text-slate-500 mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-chalkboard-user text-brandBlue"></i> By Priya Nair
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="font-heading font-extrabold text-2xl text-slate-900">₹1,499</span>
+                                <span class="text-xs text-slate-400 line-through ml-1.5">₹3,499</span>
+                            </div>
+                            <button onclick="selectCourseForEnroll('Python for Beginners to Advanced Automation')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white text-sm font-semibold hover:opacity-95 transition-all shadow-sm cursor-pointer">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course Card 3: Generative AI & Machine Learning -->
+                <article class="course-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col" data-category="AI">
+                    <div class="relative h-52 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/4F46E5/ffffff?text=Generative+AI'"
+                            alt="Generative AI and Prompt Engineering" 
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-lg bg-indigo-600 text-white text-xs font-semibold shadow">
+                            AI
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                            <span><i class="fa-regular fa-clock mr-1 text-indigo-600"></i> 32 Hours</span>
+                            <span class="flex items-center gap-1 font-semibold text-amber-500">
+                                <i class="fa-solid fa-star"></i> 4.9 <span class="text-slate-400 font-normal">(1,510)</span>
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-slate-900 mb-2 line-clamp-2">
+                            Applied Generative AI & LLM Engineering
+                        </h3>
+                        <p class="text-sm text-slate-500 mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-chalkboard-user text-brandPurple"></i> By Dr. Vikram Rao
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="font-heading font-extrabold text-2xl text-slate-900">₹2,499</span>
+                                <span class="text-xs text-slate-400 line-through ml-1.5">₹5,999</span>
+                            </div>
+                            <button onclick="selectCourseForEnroll('Applied Generative AI & LLM Engineering')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white text-sm font-semibold hover:opacity-95 transition-all shadow-sm cursor-pointer">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course Card 4: Java Spring Boot -->
+                <article class="course-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col" data-category="Java">
+                    <div class="relative h-52 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/2563EB/ffffff?text=Java+Backend'"
+                            alt="Java and Spring Boot" 
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-lg bg-brandBlue text-white text-xs font-semibold shadow">
+                            Java
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                            <span><i class="fa-regular fa-clock mr-1 text-brandBlue"></i> 40 Hours</span>
+                            <span class="flex items-center gap-1 font-semibold text-amber-500">
+                                <i class="fa-solid fa-star"></i> 4.7 <span class="text-slate-400 font-normal">(760)</span>
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-slate-900 mb-2 line-clamp-2">
+                            Java Backend Mastery with Spring Boot & Microservices
+                        </h3>
+                        <p class="text-sm text-slate-500 mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-chalkboard-user text-brandBlue"></i> By Aarav Sharma
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="font-heading font-extrabold text-2xl text-slate-900">₹1,799</span>
+                                <span class="text-xs text-slate-400 line-through ml-1.5">₹4,299</span>
+                            </div>
+                            <button onclick="selectCourseForEnroll('Java Backend Mastery with Spring Boot & Microservices')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white text-sm font-semibold hover:opacity-95 transition-all shadow-sm cursor-pointer">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course Card 5: Data Science -->
+                <article class="course-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col" data-category="Data Science">
+                    <div class="relative h-52 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/7C3AED/ffffff?text=Data+Science'"
+                            alt="Data Science Analytics" 
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-lg bg-sky-600 text-white text-xs font-semibold shadow">
+                            Data Science
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                            <span><i class="fa-regular fa-clock mr-1 text-sky-600"></i> 34 Hours</span>
+                            <span class="flex items-center gap-1 font-semibold text-amber-500">
+                                <i class="fa-solid fa-star"></i> 4.8 <span class="text-slate-400 font-normal">(890)</span>
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-slate-900 mb-2 line-clamp-2">
+                            Data Science & Machine Learning Bootcamp
+                        </h3>
+                        <p class="text-sm text-slate-500 mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-chalkboard-user text-brandPurple"></i> By Priya Nair
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="font-heading font-extrabold text-2xl text-slate-900">₹2,199</span>
+                                <span class="text-xs text-slate-400 line-through ml-1.5">₹4,999</span>
+                            </div>
+                            <button onclick="selectCourseForEnroll('Data Science & Machine Learning Bootcamp')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white text-sm font-semibold hover:opacity-95 transition-all shadow-sm cursor-pointer">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course Card 6: UI/UX Design -->
+                <article class="course-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col" data-category="UI/UX Design">
+                    <div class="relative h-52 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80" 
+                            onerror="this.src='https://placehold.co/800x500/9333EA/ffffff?text=UI+UX+Design'"
+                            alt="UI/UX Design in Figma" 
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-lg bg-brandPurple text-white text-xs font-semibold shadow">
+                            UI/UX Design
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                            <span><i class="fa-regular fa-clock mr-1 text-brandPurple"></i> 24 Hours</span>
+                            <span class="flex items-center gap-1 font-semibold text-amber-500">
+                                <i class="fa-solid fa-star"></i> 4.9 <span class="text-slate-400 font-normal">(1,120)</span>
+                            </span>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-slate-900 mb-2 line-clamp-2">
+                            Modern UI/UX Design & Design Systems in Figma
+                        </h3>
+                        <p class="text-sm text-slate-500 mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-chalkboard-user text-brandBlue"></i> By Ananya Verma
+                        </p>
+                        <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="font-heading font-extrabold text-2xl text-slate-900">₹1,599</span>
+                                <span class="text-xs text-slate-400 line-through ml-1.5">₹3,999</span>
+                            </div>
+                            <button onclick="selectCourseForEnroll('Modern UI/UX Design & Design Systems in Figma')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white text-sm font-semibold hover:opacity-95 transition-all shadow-sm cursor-pointer">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 5. INSTRUCTORS SECTION                                                -->
+    <!-- ===================================================================== -->
+    <section id="instructors" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-brandPurple font-semibold text-sm uppercase tracking-wider">World-Class Mentors</span>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mt-2 mb-4">
+                Learn from Industry Experts
+            </h2>
+            <p class="text-slate-600 text-base">
+                Our instructors bring real-world engineering and design leadership directly to your screen.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Instructor 1 -->
+            <div class="bg-white rounded-2xl p-6 text-center border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full p-1 bg-gradient-to-tr from-brandBlue to-brandPurple">
+                    <img 
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
+                        onerror="this.src='https://placehold.co/200x200/2563EB/ffffff?text=AS'"
+                        alt="Aarav Sharma" 
+                        class="w-full h-full object-cover rounded-full border-2 border-white"
+                    >
+                </div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Aarav Sharma</h3>
+                <p class="text-brandBlue font-medium text-sm mt-1">Principal Full-Stack Architect</p>
+                <p class="text-xs text-slate-500 mt-2 bg-slate-100 inline-block px-3 py-1 rounded-full">
+                    10+ Years Experience
+                </p>
+            </div>
+
+            <!-- Instructor 2 -->
+            <div class="bg-white rounded-2xl p-6 text-center border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full p-1 bg-gradient-to-tr from-brandBlue to-brandPurple">
+                    <img 
+                        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" 
+                        onerror="this.src='https://placehold.co/200x200/7C3AED/ffffff?text=PN'"
+                        alt="Priya Nair" 
+                        class="w-full h-full object-cover rounded-full border-2 border-white"
+                    >
+                </div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Priya Nair</h3>
+                <p class="text-brandPurple font-medium text-sm mt-1">Lead Data Scientist & Python Dev</p>
+                <p class="text-xs text-slate-500 mt-2 bg-slate-100 inline-block px-3 py-1 rounded-full">
+                    8+ Years Experience
+                </p>
+            </div>
+
+            <!-- Instructor 3 -->
+            <div class="bg-white rounded-2xl p-6 text-center border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full p-1 bg-gradient-to-tr from-brandBlue to-brandPurple">
+                    <img 
+                        src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" 
+                        onerror="this.src='https://placehold.co/200x200/2563EB/ffffff?text=VR'"
+                        alt="Dr. Vikram Rao" 
+                        class="w-full h-full object-cover rounded-full border-2 border-white"
+                    >
+                </div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Dr. Vikram Rao</h3>
+                <p class="text-brandBlue font-medium text-sm mt-1">AI Research Lead</p>
+                <p class="text-xs text-slate-500 mt-2 bg-slate-100 inline-block px-3 py-1 rounded-full">
+                    12+ Years Experience
+                </p>
+            </div>
+
+            <!-- Instructor 4 -->
+            <div class="bg-white rounded-2xl p-6 text-center border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full p-1 bg-gradient-to-tr from-brandBlue to-brandPurple">
+                    <img 
+                        src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" 
+                        onerror="this.src='https://placehold.co/200x200/7C3AED/ffffff?text=AV'"
+                        alt="Ananya Verma" 
+                        class="w-full h-full object-cover rounded-full border-2 border-white"
+                    >
+                </div>
+                <h3 class="font-heading font-bold text-lg text-slate-900">Ananya Verma</h3>
+                <p class="text-brandPurple font-medium text-sm mt-1">Head of Product & UI/UX Design</p>
+                <p class="text-xs text-slate-500 mt-2 bg-slate-100 inline-block px-3 py-1 rounded-full">
+                    9+ Years Experience
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 6. COURSE DETAILS (FEATURED CURRICULUM SPOTLIGHT)                     -->
+    <!-- ===================================================================== -->
+    <section id="course-details" class="py-16 md:py-24 bg-gradient-to-br from-blue-50/80 via-white to-purple-50/80 border-y border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                
+                <!-- Left Column: Visual & Quick Stats -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-brandBlue to-brandPurple p-8 sm:p-10 text-white flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3.5 py-1 rounded-full bg-white/20 text-xs font-semibold uppercase tracking-wider mb-4">
+                            Featured Flagship Track
+                        </span>
+                        <h3 class="font-heading font-extrabold text-2xl sm:text-3xl leading-snug mb-4">
+                            Full-Stack Web & AI Engineering Mastertrack
+                        </h3>
+                        <p class="text-blue-100 text-sm sm:text-base leading-relaxed mb-8">
+                            Go from zero to deploying production-grade full-stack applications integrated with modern AI APIs. Built for aspiring software engineers.
+                        </p>
+                    </div>
+
+                    <!-- Course Key Metrics -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
+                        <div>
+                            <p class="text-2xl font-heading font-extrabold">48 Hrs</p>
+                            <p class="text-xs text-blue-100 mt-0.5">Total Duration</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-heading font-extrabold">120+</p>
+                            <p class="text-xs text-blue-100 mt-0.5">HD Lessons</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-heading font-extrabold">8 Real</p>
+                            <p class="text-xs text-blue-100 mt-0.5">Live Projects</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Detailed Description & Learning Outcomes -->
+                <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center">
+                    <h4 class="font-heading font-bold text-xl sm:text-2xl text-slate-900 mb-3">
+                        Course Overview & Learning Outcomes
+                    </h4>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                        This structured curriculum combines clean frontend architecture with scalable backend APIs and cloud deployment. Every module includes interactive coding exercises and mentor code reviews.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brandBlue mt-1"></i>
+                            <span class="text-sm text-slate-700 font-medium">Build responsive layouts with semantic HTML5 & modern CSS</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brandPurple mt-1"></i>
+                            <span class="text-sm text-slate-700 font-medium">Master JavaScript ES6+, React components & state management</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brandBlue mt-1"></i>
+                            <span class="text-sm text-slate-700 font-medium">Design RESTful APIs with Node.js, Python & SQL databases</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brandPurple mt-1"></i>
+                            <span class="text-sm text-slate-700 font-medium">Integrate LLM chatbots & deploy apps with CI/CD pipelines</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brandBlue mt-1"></i>
+                            <span class="text-sm text-slate-700 font-medium">Earn an industry-verified LearnHub Completion Certificate</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brandPurple mt-1"></i>
+                            <span class="text-sm text-slate-700 font-medium">Lifetime access to updates & 1-on-1 career portfolio review</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-4">
+                        <button onclick="selectCourseForEnroll('Full-Stack Web & AI Engineering Mastertrack')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white font-semibold text-sm sm:text-base shadow-md hover:opacity-95 transition-all cursor-pointer">
+                            Enroll in Mastertrack — ₹2,999
+                        </button>
+                        <span class="text-xs sm:text-sm text-slate-500">
+                            <i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> 30-Day Money-Back Guarantee
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 7. STUDENT REVIEWS                                                    -->
+    <!-- ===================================================================== -->
+    <section id="reviews" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-brandBlue font-semibold text-sm uppercase tracking-wider">Success Stories</span>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mt-2 mb-4">
+                What Our Students Say
+            </h2>
+            <p class="text-slate-600 text-base">
+                Join thousands of graduates who transformed their careers with LearnHub.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="bg-white p-7 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg transition-shadow flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed italic mb-6">
+                        "The Full-Stack Web Development course gave me the confidence to build real projects from scratch. Within two months of finishing, I landed my first Frontend Developer role!"
+                    </p>
+                </div>
+                <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+                    <img 
+                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
+                        onerror="this.src='https://placehold.co/100x100/2563EB/ffffff?text=SK'"
+                        alt="Sneha Kulkarni" 
+                        class="w-11 h-11 rounded-full object-cover"
+                    >
+                    <div>
+                        <h4 class="font-heading font-bold text-sm text-slate-900">Sneha Kulkarni</h4>
+                        <p class="text-xs text-slate-500">Frontend Developer, Bengaluru</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="bg-white p-7 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg transition-shadow flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed italic mb-6">
+                        "Dr. Vikram Rao breaks down complex AI and LLM concepts into beginner-friendly steps. The hands-on Python labs made every concept crystal clear."
+                    </p>
+                </div>
+                <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+                    <img 
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" 
+                        onerror="this.src='https://placehold.co/100x100/7C3AED/ffffff?text=RM'"
+                        alt="Rohan Mehta" 
+                        class="w-11 h-11 rounded-full object-cover"
+                    >
+                    <div>
+                        <h4 class="font-heading font-bold text-sm text-slate-900">Rohan Mehta</h4>
+                        <p class="text-xs text-slate-500">AI Engineer, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="bg-white p-7 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg transition-shadow flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed italic mb-6">
+                        "Ananya's UI/UX Design course completely elevated my portfolio. Learning Figma components and design systems helped me transition into product design seamlessly."
+                    </p>
+                </div>
+                <div class="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+                    <img 
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" 
+                        onerror="this.src='https://placehold.co/100x100/2563EB/ffffff?text=KP'"
+                        alt="Kavya Menon" 
+                        class="w-11 h-11 rounded-full object-cover"
+                    >
+                    <div>
+                        <h4 class="font-heading font-bold text-sm text-slate-900">Kavya Menon</h4>
+                        <p class="text-xs text-slate-500">Product Designer, Pune</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 8. ENROLLMENT SECTION                                                 -->
+    <!-- ===================================================================== -->
+    <section id="enrollment" class="py-16 md:py-24 bg-gradient-to-r from-brandBlue to-brandPurple text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white text-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+                <div class="text-center max-w-xl mx-auto mb-8">
+                    <span class="px-3.5 py-1 rounded-full bg-blue-50 text-brandBlue font-semibold text-xs uppercase tracking-wider">
+                        Start Learning Today
+                    </span>
+                    <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 mt-3 mb-2">
+                        Quick Course Enrollment
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base">
+                        Fill in your details below to reserve your seat and receive instant access to your course dashboard.
+                    </p>
+                </div>
+
+                <form id="enrollment-form" onsubmit="handleEnrollment(event)" class="space-y-5 max-w-xl mx-auto">
+                    <div>
+                        <label for="student-name" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                            Student Name <span class="text-rose-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="student-name" 
+                            required 
+                            placeholder="Enter your full name"
+                            class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue focus:border-transparent transition-all"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="student-email" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                            Email Address <span class="text-rose-500">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="student-email" 
+                            required 
+                            placeholder="you@example.com"
+                            class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue focus:border-transparent transition-all"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="course-select" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                            Select Course
+                        </label>
+                        <select 
+                            id="course-select" 
+                            class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-slate-900 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brandBlue focus:border-transparent transition-all"
+                        >
+                            <option value="Complete Full-Stack Web Development Bootcamp">Complete Full-Stack Web Development Bootcamp (₹1,999)</option>
+                            <option value="Python for Beginners to Advanced Automation">Python for Beginners to Advanced Automation (₹1,499)</option>
+                            <option value="Applied Generative AI & LLM Engineering">Applied Generative AI & LLM Engineering (₹2,499)</option>
+                            <option value="Java Backend Mastery with Spring Boot & Microservices">Java Backend Mastery with Spring Boot & Microservices (₹1,799)</option>
+                            <option value="Data Science & Machine Learning Bootcamp">Data Science & Machine Learning Bootcamp (₹2,199)</option>
+                            <option value="Modern UI/UX Design & Design Systems in Figma">Modern UI/UX Design & Design Systems in Figma (₹1,599)</option>
+                            <option value="Full-Stack Web & AI Engineering Mastertrack">Full-Stack Web & AI Engineering Mastertrack (₹2,999)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white font-bold text-base shadow-lg shadow-blue-500/25 hover:opacity-95 transition-all hover:-translate-y-0.5 cursor-pointer">
+                        Enroll Now
+                    </button>
+                </form>
+
+                <!-- Dynamic Confirmation Banner (Hidden until submit) -->
+                <div id="enrollment-success" class="hidden mt-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm text-center max-w-xl mx-auto">
+                    <i class="fa-solid fa-circle-check text-emerald-600 text-lg mr-1.5"></i>
+                    <span id="enrollment-message"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 9. FOOTER                                                             -->
+    <!-- ===================================================================== -->
+    <footer id="contact" class="bg-darkSlate text-slate-300 pt-16 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Column 1: About Us -->
+                <div class="lg:col-span-2">
+                    <a href="#home" class="flex items-center gap-2.5 mb-4">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brandBlue to-brandPurple flex items-center justify-center text-white">
+                            <i class="fa-solid fa-graduation-cap text-lg"></i>
+                        </div>
+                        <span class="font-heading font-extrabold text-2xl text-white">
+                            LearnHub
+                        </span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-md mb-6">
+                        LearnHub is a modern online learning platform dedicated to making high-quality tech, AI, and design education accessible, practical, and career-focused for learners everywhere.
+                    </p>
+                    <!-- Social Media Icons -->
+                    <div class="flex items-center gap-3">
+                        <a href="#contact" aria-label="LinkedIn" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brandBlue text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="#contact" aria-label="Twitter / X" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brandBlue text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="#contact" aria-label="YouTube" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brandPurple text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#contact" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brandPurple text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#categories" class="hover:text-white transition-colors">Course Categories</a></li>
+                        <li><a href="#courses" class="hover:text-white transition-colors">Popular Courses</a></li>
+                        <li><a href="#instructors" class="hover:text-white transition-colors">Our Instructors</a></li>
+                        <li><a href="#reviews" class="hover:text-white transition-colors">Student Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact Info -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4">Contact Us</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope text-brandBlue mt-1"></i>
+                            <span>support@learnhub.in</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone text-brandPurple mt-1"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-brandBlue mt-1"></i>
+                            <span>HITEC City, Hyderabad, India</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright Row -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-500">
+                <p>&copy; 2026 LearnHub – Online Learning Platform. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#contact" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
+                    <a href="#contact" class="hover:text-slate-300 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- INTERACTIVE LOGIN / SIGN UP MODAL (Clean Custom UI, No alert())       -->
+    <!-- ===================================================================== -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-7 sm:p-8 shadow-2xl relative animate-fade-in">
+            <button onclick="closeAuthModal()" aria-label="Close Modal" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-2.5 mb-5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brandBlue to-brandPurple flex items-center justify-center text-white">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <span class="font-heading font-bold text-xl text-slate-900" id="modal-title">Welcome Back</span>
+            </div>
+
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div id="modal-name-field" class="hidden">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" placeholder="Your full name" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+                    <input type="email" required placeholder="you@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brandBlue">
+                </div>
+                <button type="submit" id="modal-submit-btn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple text-white font-semibold text-sm shadow-md hover:opacity-95 cursor-pointer">
+                    Login to LearnHub
+                </button>
+            </form>
+            <p id="modal-feedback" class="hidden mt-4 text-center text-xs font-medium text-emerald-600 bg-emerald-50 py-2.5 px-3 rounded-xl"></p>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- LIGHTWEIGHT VANILLA JS FOR INTERACTIVITY                              -->
+    <!-- ===================================================================== -->
+    <script>
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('fa-bars');
+            menuIcon.classList.toggle('fa-xmark');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-xmark');
+            });
+        });
+
+        // 2. Category Filtering for Courses
+        function filterCourses(category) {
+            const cards = document.querySelectorAll('.course-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update filter button styles
+            buttons.forEach(btn => {
+                if (btn.textContent.trim() === category || (category === 'All' && btn.textContent.trim() === 'All')) {
+                    btn.classList.remove('bg-slate-100', 'text-slate-600');
+                    btn.classList.add('bg-brandBlue', 'text-white');
+                } else {
+                    btn.classList.remove('bg-brandBlue', 'text-white');
+                    btn.classList.add('bg-slate-100', 'text-slate-600');
+                }
+            });
+
+            // Show/Hide matching course cards
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'All' || cardCat === category || (category === 'AI' && (cardCat === 'AI' || cardCat === 'Data Science'))) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Scroll smoothly to courses section when triggered from category cards
+            document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 3. Hero Search Handler
+        function handleHeroSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('hero-search-input').value.trim().toLowerCase();
+            const cards = document.querySelectorAll('.course-card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const cat = card.getAttribute('data-category').toLowerCase();
+                if (!query || title.includes(query) || cat.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 4. Pre-fill Course in Enrollment Form & Scroll
+        function selectCourseForEnroll(courseName) {
+            const select = document.getElementById('course-select');
+            select.value = courseName;
+            document.getElementById('enrollment').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('student-name').focus();
+        }
+
+        // 5. Enrollment Form Submission Feedback
+        function handleEnrollment(event) {
+            event.preventDefault();
+            const name = document.getElementById('student-name').value.trim();
+            const email = document.getElementById('student-email').value.trim();
+            const course = document.getElementById('course-select').value;
+
+            const successBox = document.getElementById('enrollment-success');
+            const messageEl = document.getElementById('enrollment-message');
+
+            messageEl.textContent = `Congratulations, ${name}! Your enrollment request for "${course}" has been confirmed. Details sent to ${email}.`;
+            successBox.classList.remove('hidden');
+            document.getElementById('enrollment-form').reset();
+        }
+
+        // 6. Auth Modal Logic
+        function openAuthModal(mode) {
+            const modal = document.getElementById('auth-modal');
+            const title = document.getElementById('modal-title');
+            const nameField = document.getElementById('modal-name-field');
+            const submitBtn = document.getElementById('modal-submit-btn');
+            const feedback = document.getElementById('modal-feedback');
+
+            feedback.classList.add('hidden');
+            if (mode === 'signup') {
+                title.textContent = 'Create Your Free Account';
+                nameField.classList.remove('hidden');
+                submitBtn.textContent = 'Sign Up for LearnHub';
+            } else {
+                title.textContent = 'Welcome Back to LearnHub';
+                nameField.classList.add('hidden');
+                submitBtn.textContent = 'Login';
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleAuthSubmit(event) {
+            event.preventDefault();
+            const feedback = document.getElementById('modal-feedback');
+            feedback.textContent = 'Success! Redirecting to your LearnHub student dashboard...';
+            feedback.classList.remove('hidden');
+            setTimeout(closeAuthModal, 1500);
+        }
+    </script>
+</body>
+</html>
